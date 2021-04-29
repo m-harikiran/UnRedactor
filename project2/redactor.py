@@ -28,5 +28,7 @@ def redactNames(path):
                               '\u2588'*len(name[0]), data)  # Replacing the names with block character
 
     # Opening a file with extension .redacted
-    redactedDoc = open(path.replace('.txt', '.redacted', 'w'))
+    redactedDoc = open(path.replace('.txt', '.redacted'), 'w')
     redactedDoc.write(data)  # Writing redacted data to file
+
+    return path.replace('.txt', '.redacted')
