@@ -65,3 +65,16 @@ def getTrainFeatures(data):
             train_data.append((features, name))
 
     return train_data
+
+
+# This methods the read the redacted data from the given path / file and return's features of redated name for prediction
+
+def extractRedacted(path):
+
+    redacted_data = []          # Data set built from redacted documents for predicting names
+
+    data = open(path).read()        # Reading the redacted data
+    # Extracting the features from the redacted data
+    redacted_data.extend(getRedactedFeatures(data))
+
+    return redacted_data  # Returning the features of the redacted names
