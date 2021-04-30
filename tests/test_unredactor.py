@@ -15,4 +15,20 @@ def testRedactNames():
 
     # Reading the data from the redacted document
     redacted_data = open(redacted_doc_loc).read().splitlines()
+
+    # Verifying if the redacted data and expected data is same or not
     assert redacted_data[1] == expected
+
+
+def testGetTrain():
+
+    # Location and name of text data file
+    file_loc = 'project_docs/package_test/test.txt'
+
+    # Calling the method extractTrain
+    train_xy = unredactor.extractTrain(file_loc)
+
+    # Verifying if the return type is list or not
+    assert type(train_xy) == list
+    # Verifying if the list contains tuples or not
+    assert type(train_xy[0]) == tuple
