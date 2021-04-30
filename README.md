@@ -183,7 +183,7 @@ The matched names are then processed to extract features such as length of name 
         features['w3_len'] = 0  # Length of 3rd word
         features['w4_len'] = 0  # Length of 4th word
         words = name.split(' ')
-        for i in range(len(words)):  # Finding the length of words
+for i in range(len(words)):  # Finding the length of words
             if i == 0:
                 features['w1_len'] = len(words[i])
             elif i == 1:
@@ -193,4 +193,24 @@ The matched names are then processed to extract features such as length of name 
             elif i == 3:
                 features['w4_len'] = len(words[i])
 
+```
+
+### 3. redactor.py
+
+This package is used by **main.py** to read, redact the names present and write the redacted data to a file with extension **.redacted**
+
+#### 1. redactNames(path)
+
+This method reads a text file using a path or pattern as input, then tokenizes the data to label the person using NLTK's named entity chunk. The block letters '█' are then used to replace the person's name. After that, the redated data is written to a file with the extension **.redacted**. Finally, this procedure returns the redacted document's route and file name.
+
+```python
+    data = open(path).read()  # Reading the file to be redacted
+    tokenized_data = nltk.word_tokenize(data)       # Splitting data into words
+    pos_tokenized_data = nltk.pos_tag(tokenized_data) # Generationg the parts of speech of each word
+    chk_tagged_tokens = nltk.chunk.ne_chunk(pos_tokenized_data) # Chunking the tagged words using named entity chunker
+    for chk in chk_tagged_tokens.subtrees():
+        if chk.label().upper() == 'PERSON':  # Extracting the words with tag PERSON
+            for name in chk:  # Extracting first and last name
+                data = re.sub('\\b{}\\b'.format(name[0]),
+                              '\u2588'*len(name[0]), data)  # Replacing the names with block character
 ```
