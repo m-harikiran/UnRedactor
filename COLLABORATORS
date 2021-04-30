@@ -1,0 +1,5 @@
+1. https://docs.python.org/3/library/argparse.html#nargs    |   Helped me with parsing arguments using command line
+2. https://docs.python.org/2/library/glob.html  |   Helped me in understanding glob library to find the files with matching input files pattern
+3. https://stackoverflow.com/questions/20290870/improving-the-extraction-of-human-names-with-nltk   |   Helped me in understanding the NLTK package for assigning named entity tags to words
+4. https://www.geeksforgeeks.org/how-to-use-glob-function-to-find-files-recursively-in-python/      |   Helped me in recursively finding files with matching pattern in a folder
+5. https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html    |   Helped me in understanding KNN Classifier and to find top k likely neighbors
