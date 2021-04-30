@@ -264,7 +264,7 @@ This method is used to test method **extractRedacted()** in **unredactor.py**. I
     assert type(train_xy[0]) == tuple # Verifying if the list contains tuples or not
 ```
 
-#### iv. testGetRedactedFeatures()
+#### v. testGetRedactedFeatures()
 
 This method is used to test method **getRedactedFeatures()** in **unredactor.py**. In this, I am verifying if return data is in a list, verifying if returned data contains list of tuples and also checking if the expected output and is same as resulted output.
 
@@ -274,3 +274,7 @@ This method is used to test method **getRedactedFeatures()** in **unredactor.py*
     assert type(extracted_features[0][0]) == dict # Verifying if the tuple returned has dictionary of features
     assert extracted_features == expected # Verifying it the resulted output and expected output are same or not
 ```
+
+## References
+
+The references used for this project can be found in [COLLOBARATORS](https://github.com/Harikiran-Madishetti/cs5293sp21-project2/blob/main/COLLABORATORS 'COLLOBARATORS') file
