@@ -47,7 +47,7 @@ The below are the insturctions to be followed to download, install and run the p
 7. After installing the dependencies successfully run unit tests
    **`pipenv run pytest`**
 8. After running the unit tests successfully start using package (relpace URL with the URL of incidents list) using below command to fetch summary of the incidents by its nature
-   **`pipenv run python project2/main.py --tdata "project_docs/train/**/*.txt" --input "project_docs/redact/review.txt"`**
+   **`pipenv run python project2/main.py --tdata "project_docs/train/**/\*.txt" --input "project_docs/redact/review.txt"`\*\*
 
 ## Assumptions
 
