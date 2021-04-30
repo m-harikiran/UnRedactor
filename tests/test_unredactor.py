@@ -20,7 +20,7 @@ def testRedactNames():
     assert redacted_data[1] == expected
 
 
-def testGetTrainFeatures():
+def testExtractTrain():
 
     # Location and name of text data file
     file_loc = 'project_docs/package_test/test.txt'
