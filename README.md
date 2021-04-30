@@ -119,7 +119,7 @@ This method takes a path or pattern as input to read the files used to retrieve 
         training_data.extend(getTrainFeatures(data))
 ```
 
-#### 1. getTrainFeatures(data)
+#### 2. getTrainFeatures(data)
 
 This method takes the data read by the previous method, tokenizes it, and then uses the NLTK called object named entity chunk to define the individual names. I am extracting features such as length of name with and without spaces, number of terms, number of spaces, length of words 1, 2, three, and word four from the listed names. All extracted features are stored in a dictionary, and the result is a list of tuples containing a dictionary of features and their corresponding names.
 
@@ -149,4 +149,48 @@ This method takes the data read by the previous method, tokenizes it, and then u
                     features['w3_len'] = len(words[i])
                 elif i == 3:
                     features['w4_len'] = len(words[i])
+```
+
+#### 3. extractRedacted(path)
+
+This method takes a path or pattern to read the redacted files whose names are unredacted or predicted using the ML model. This method calls **getRedactedFeatures(data)** to construct the features for the redacted names and finally returns a list of tuples, each containing a redacted name and features.
+
+```python
+    data = open(path).read()        # Reading the redacted data
+    # Extracting the features from the redacted data
+    redacted_data.extend(getRedactedFeatures(data))
+```
+
+#### 4. getRedactedFeatures(data)
+
+This method takes the data read by the previous method, identifies the redacted names using the regex pattern.
+
+```python
+    pattern = re.compile('\u2588+\s*\u2588*\s*\u2588*\s*\u2588+')  #Regex pattern
+    matched_names = re.findall(pattern, data)  # Finding all the redacted names with matching pattern
+```
+
+The matched names are then processed to extract features such as length of name with and without spaces, number of terms, number of spaces, length of words 1, 2, three, and word four from the listed names. All extracted features are stored in a dictionary, and the result is a list of tuples containing a dictionary of features and their corresponding redacted names.
+
+```python
+        name = re.sub('\s+', ' ',  names)  # Removing extra spaces present in between words
+        features['name_len_s'] = len(name)  # Length of name with spaces
+        features['name_len'] = len(name.replace(' ', ''))  # Length of name without spaces
+        features['word_cnt'] = len(name.split(' '))  # No. of words in a name
+        features['white_space'] = len(name) - len(name.replace(' ', ''))  # No. of white spaces in a name
+        features['w1_len'] = 0  # Length of 1st word
+        features['w2_len'] = 0  # Length of 2nd word
+        features['w3_len'] = 0  # Length of 3rd word
+        features['w4_len'] = 0  # Length of 4th word
+        words = name.split(' ')
+for i in range(len(words)):  # Finding the length of words
+            if i == 0:
+                features['w1_len'] = len(words[i])
+            elif i == 1:
+                features['w2_len'] = len(words[i])
+            elif i == 2:
+                features['w3_len'] = len(words[i])
+            elif i == 3:
+                features['w4_len'] = len(words[i])
+
 ```
