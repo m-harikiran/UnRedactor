@@ -120,5 +120,5 @@ def getRedactedFeatures(data):
             elif i == 3:
                 features['w4_len'] = len(words[i])
 
-        redacted_names.append(features)
+        redacted_names.append((features, names))
     return redacted_names
