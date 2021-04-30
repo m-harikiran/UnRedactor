@@ -51,7 +51,7 @@ def main(input_parameters):
     # Finding the K Nearest Neighbors for redacted names
 
     indx_KNN = knnModel.kneighbors(
-        X_redacted, n_neighbors=3, return_distance=False)  # Finding the K Nearest Neighbors and returning their indices
+        X_redacted, n_neighbors=4, return_distance=False)  # Finding the K Nearest Neighbors and returning their indices
 
     # Predicting the K most likely names and writing it to file with extension .predicted
 
