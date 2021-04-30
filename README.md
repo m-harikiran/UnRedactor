@@ -109,7 +109,7 @@ The above code is used to extract the most likely names predicted by the KNN Cla
 
 This package is used by **main.py** to read redacted data and construct the features required for predicting the redacted names present in a document.
 
-#### 1. extractTrain(path)
+#### i. extractTrain(path)
 
 This method takes a path or pattern as input to read the files used to retrieve names, as well as the corresponding features for training the ML model, and calls a method **getTrainFeatures(data)** to obtain training features. Finally, this method returns a list of tuples, each of which contains a person's name and features.
 
@@ -119,7 +119,7 @@ This method takes a path or pattern as input to read the files used to retrieve 
         training_data.extend(getTrainFeatures(data))
 ```
 
-#### 2. getTrainFeatures(data)
+#### ii. getTrainFeatures(data)
 
 This method takes the data read by the previous method, tokenizes it, and then uses the NLTK called object named entity chunk to define the individual names. I am extracting features such as length of name with and without spaces, number of terms, number of spaces, length of words 1, 2, three, and word four from the listed names. All extracted features are stored in a dictionary, and the result is a list of tuples containing a dictionary of features and their corresponding names.
 
@@ -151,7 +151,7 @@ This method takes the data read by the previous method, tokenizes it, and then u
                     features['w4_len'] = len(words[i])
 ```
 
-#### 3. extractRedacted(path)
+#### iii. extractRedacted(path)
 
 This method takes a path or pattern to read the redacted files whose names are unredacted or predicted using the ML model. This method calls **getRedactedFeatures(data)** to construct the features for the redacted names and finally returns a list of tuples, each containing a redacted name and features.
 
@@ -161,7 +161,7 @@ This method takes a path or pattern to read the redacted files whose names are u
     redacted_data.extend(getRedactedFeatures(data))
 ```
 
-#### 4. getRedactedFeatures(data)
+#### iv. getRedactedFeatures(data)
 
 This method takes the data read by the previous method, identifies the redacted names using the regex pattern.
 
@@ -199,7 +199,7 @@ for i in range(len(words)):  # Finding the length of words
 
 This package is used by **main.py** to read, redact the names present and write the redacted data to a file with extension **.redacted**
 
-#### 1. redactNames(path)
+#### i. redactNames(path)
 
 This method reads a text file using a path or pattern as input, then tokenizes the data to label the person using NLTK's named entity chunk. The block letters '█' are then used to replace the person's name. After that, the redated data is written to a file with the extension **.redacted**. Finally, this procedure returns the redacted document's route and file name.
 
@@ -213,4 +213,20 @@ This method reads a text file using a path or pattern as input, then tokenizes t
             for name in chk:  # Extracting first and last name
                 data = re.sub('\\b{}\\b'.format(name[0]),
                               '\u2588'*len(name[0]), data)  # Replacing the names with block character
+```
+
+### 4. test_unredactor.py
+
+The package **test_unredactor.py** has test cases defined as methods, that can be used for unit testing of methods defined in the package **redactor.py** and **unredactor.py**. In order to test each method in **redactor.py** and **unredactor.py**, first we need to import **redactor.py** and **unredactor.py**. I am using **assert** in python to verify if the test condition is true or not. If the condition returns FALSE then assert statement will fail, which inturns fails the test case.
+
+#### i. testRedactNames()
+
+This method is used to test method **redactNames()** in **redactor.py**. In this, I am verifying if redacted data written to the file is same as expected or not.
+
+```python
+    expected = "I couldn't image ██████ ███████ in a serious role, but his performance truly "
+    file_loc = 'project_docs/package_test/test.txt'  # Name and path of the test data
+    redacted_doc_loc = redactor.redactNames(file_loc)  # Redacting the data of the test file
+    redacted_data = open(redacted_doc_loc).read().splitlines()  # Reading the data from the redacted document
+    assert redacted_data[1] == expected  # Verifying if the redacted data and expected data is same or not
 ```
