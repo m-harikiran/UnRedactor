@@ -75,7 +75,7 @@ def testExtractRedacted():
     # Location and name of text data file
     file_loc = 'project_docs/package_test/test.redacted'
 
-    # Calling the method extractTrain
+    # Calling the method extractRedacted
     train_xy = unredactor.extractRedacted(file_loc)
 
     # Verifying if the return type is list or not
