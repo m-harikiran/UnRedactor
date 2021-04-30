@@ -72,7 +72,7 @@ def main(input_parameters):
 
         message = '\n{}. The top 4 likely names for {} :: {}, {}, {}, {}\n'.format(
             count, x, y_train[y[0]], y_train[y[1]], y_train[y[2]], y_train[y[3]])
-
+        count += 1
         doc.write(message)
 
         doc.close()
