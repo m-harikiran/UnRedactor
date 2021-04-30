@@ -104,3 +104,49 @@ I am using the K-Nearest Neighbor model to predict the top 4 neighbors of the re
 ```
 
 The above code is used to extract the most likely names predicted by the KNN Classifier, which can replace redacted names, and then the predicted names are written to a file with extension **.predicted**
+
+### 2. unredactor.py
+
+This package is used by **main.py** to read redacted data and construct the features required for predicting the redacted names present in a document.
+
+#### 1. extractTrain(path)
+
+This method takes a path or pattern as input to read the files used to retrieve names, as well as the corresponding features for training the ML model, and calls a method **getTrainFeatures(data)** to obtain training features. Finally, this method returns a list of tuples, each of which contains a person's name and features.
+
+```python
+    for file_name in glob.glob(path, recursive=True):
+        data = open(file_name).read()
+        training_data.extend(getTrainFeatures(data))
+```
+
+#### 1. getTrainFeatures(data)
+
+This method takes the data read by the previous method, tokenizes it, and then uses the NLTK called object named entity chunk to define the individual names. I am extracting features such as length of name with and without spaces, number of terms, number of spaces, length of words 1, 2, three, and word four from the listed names. All extracted features are stored in a dictionary, and the result is a list of tuples containing a dictionary of features and their corresponding names.
+
+```python
+    tokenized_data = nltk.word_tokenize(data)       # Splitting data into words
+    pos_tokenized_data = nltk.pos_tag(tokenized_data)
+    chk_tagged_tokens = nltk.chunk.ne_chunk(pos_tokenized_data)
+    for chk in chk_tagged_tokens.subtrees():
+        features = {}  # To hold features of each name
+        if chk.label().upper() == 'PERSON':  # Extracting the words with tag PERSON
+            name = ' '.join([i[0] for i in chk])
+            features['name_len_s'] = len(name)  # Length of name with spaces
+            features['name_len'] = len(name.replace(' ', '')) # Length of name without spaces
+            features['word_cnt'] = len(name.split(' ')) # No. of words in a name
+            features['white_space'] = len(name) - len(name.replace(' ', '')) # No. of white spaces in a name
+            features['w1_len'] = 0  # Length of 1st word
+            features['w2_len'] = 0  # Length of 2nd word
+            features['w3_len'] = 0  # Length of 3rd word
+            features['w4_len'] = 0  # Length of 4th word
+            words = name.split(' ')
+            for i in range(len(words)):  # Finding the length of words
+                if i == 0:
+                    features['w1_len'] = len(words[i])
+                elif i == 1:
+                    features['w2_len'] = len(words[i])
+                elif i == 2:
+                    features['w3_len'] = len(words[i])
+                elif i == 3:
+                    features['w4_len'] = len(words[i])
+```
