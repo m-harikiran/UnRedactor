@@ -31,4 +31,6 @@ def redactNames(path):
     redactedDoc = open(path.replace('.txt', '.redacted'), 'w')
     redactedDoc.write(data)  # Writing redacted data to file
 
+    redactedDoc.close()
+
     return path.replace('.txt', '.redacted')
