@@ -230,3 +230,14 @@ This method is used to test method **redactNames()** in **redactor.py**. In this
     redacted_data = open(redacted_doc_loc).read().splitlines()  # Reading the data from the redacted document
     assert redacted_data[1] == expected  # Verifying if the redacted data and expected data is same or not
 ```
+
+#### ii. testGetTrainFeatures()
+
+This method is used to test method **getTrainFeatures()** in **unredactor.py**. In this, I am verifying if return data is in a list and also verifying if returned data contains list of tuples.
+
+```python
+    file_loc = 'project_docs/package_test/test.txt' # Location and name of text data file
+    train_xy = unredactor.extractTrain(file_loc) # Calling the method extractTrain
+    assert type(train_xy) == list # Verifying if the return type is list or not
+    assert type(train_xy[0]) == tuple # Verifying if the list contains tuples or not
+```
