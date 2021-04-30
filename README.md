@@ -231,9 +231,9 @@ This method is used to test method **redactNames()** in **redactor.py**. In this
     assert redacted_data[1] == expected  # Verifying if the redacted data and expected data is same or not
 ```
 
-#### ii. testGetTrainFeatures()
+#### ii. testExtractTrain()
 
-This method is used to test method **getTrainFeatures()** in **unredactor.py**. In this, I am verifying if return data is in a list and also verifying if returned data contains list of tuples.
+This method is used to test method **extractTrain()** in **unredactor.py**. In this, I am verifying if return data is in a list and also verifying if returned data contains list of tuples.
 
 ```python
     file_loc = 'project_docs/package_test/test.txt' # Location and name of text data file
