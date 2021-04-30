@@ -252,3 +252,14 @@ This method is used to test method **getTrainFeatures()** in **unredactor.py**. 
     assert type(extracted_features[0][0]) == dict # Verifying if the tuple returned has dictionary of features
     assert extracted_features == expected # Verifying it the resulted output and expected output are same or not
 ```
+
+#### iv. testExtractRedacted()
+
+This method is used to test method **extractRedacted()** in **unredactor.py**. In this, I am verifying if return data is in a list and also verifying if returned data contains list of tuples.
+
+```python
+    file_loc = 'project_docs/package_test/test.redacted' # Location and name of text data file
+    train_xy = unredactor.extractRedacted(file_loc) # Calling the method extractRedacted
+    assert type(train_xy) == list # Verifying if the return type is list or not
+    assert type(train_xy[0]) == tuple # Verifying if the list contains tuples or not
+```
