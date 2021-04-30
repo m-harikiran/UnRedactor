@@ -65,3 +65,20 @@ def testGetTrainFeatures():
     assert type(extracted_features[0][0]) == dict
     # Verifying it the resulted output and expected output are same or not
     assert extracted_features == expected
+
+
+# Testing method used to read the redacted document and construct the features for redacted names.
+
+
+def testExtractRedacted():
+
+    # Location and name of text data file
+    file_loc = 'project_docs/package_test/test.redacted'
+
+    # Calling the method extractTrain
+    train_xy = unredactor.extractRedacted(file_loc)
+
+    # Verifying if the return type is list or not
+    assert type(train_xy) == list
+    # Verifying if the list contains tuples or not
+    assert type(train_xy[0]) == tuple
