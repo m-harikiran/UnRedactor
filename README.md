@@ -1,6 +1,6 @@
 # Uredact Sensitive Information
 
-#### Author: Harikiran Madishetti
+#### Author: Harikiran M
 
 ---
 
