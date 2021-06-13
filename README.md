@@ -35,7 +35,7 @@ The below are the insturctions to be followed to download, install and run the p
 1. Create a directory and then cd into the directory
    **`mkdir Text_Project2 && cd Test_Project2`**
 2. Download the project files from GitHub
-   **`git clone https://github.com/Harikiran-Madishetti/cs5293sp21-project2.git`**
+   **`git clone https://github.com/m-harikiran/cs5293sp21-project2.git`**
 3. Cd into project directory **cs5293sp21-project1**
    **`cd cs5293sp21-project2`**
 4. Install python package pipenv to create a virtual enviromnent
